@@ -12,10 +12,9 @@
         /* FONTES CLÁSSICAS DOS ANOS 2010 */
         @import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
 
-        /* O Pincel Mágico: O CSS calcula todas as cores secundárias baseadas na cor principal! */
+        /* O Pincel Mágico */
         :root {
-            --base-color: #8e44ad; /* Roxo padrão (Kuromi) */
-            
+            --base-color: #8e44ad; 
             --primary-purple: var(--base-color);
             --light-purple: color-mix(in srgb, var(--base-color) 40%, white);
             --dark-purple: color-mix(in srgb, var(--base-color) 60%, black);
@@ -27,7 +26,6 @@
             margin: 0;
             padding: 0;
             background-color: var(--bg-color);
-            /* Estampa de bolinhas bem 2010s */
             background-image: radial-gradient(var(--light-purple) 2px, transparent 2px);
             background-size: 20px 20px;
             color: var(--text-color);
@@ -35,7 +33,7 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            transition: background 0.5s ease; /* Animação suave ao mudar de cor */
+            transition: background 0.5s ease;
         }
 
         /* Texto Correndo Clássico */
@@ -49,7 +47,7 @@
             border-bottom: 3px dashed var(--dark-purple);
         }
 
-        /* Container do Blog (Responsivo) */
+        /* Container do Blog */
         #blog-container {
             width: 95%;
             max-width: 900px;
@@ -86,7 +84,7 @@
             font-size: 14px;
         }
 
-        /* Sidebar (Fica em cima no celular, do lado no PC) */
+        /* Sidebar */
         .sidebar {
             flex: 1 1 250px;
             padding: 20px;
@@ -118,11 +116,15 @@
             background-color: var(--light-purple);
             border-radius: 50%;
             margin: 0 auto 10px;
-            display: block;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             border: 3px solid var(--primary-purple);
-            text-align: center;
-            line-height: 100px;
-            font-size: 40px;
+        }
+        
+        .perfil-img img {
+            width: 60px;
+            height: 60px;
         }
 
         /* Botões da Playlist */
@@ -160,7 +162,7 @@
             align-content: start;
         }
 
-        /* Botões de Categorias */
+        /* Botões de Categorias (Atualizado para Imagens) */
         .blog-post-btn {
             background: #fff;
             border: 2px dashed var(--primary-purple);
@@ -171,17 +173,26 @@
             transition: 0.2s;
             color: var(--dark-purple);
             font-weight: bold;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
         }
 
-        .blog-post-btn span {
-            display: block;
-            font-size: 2.5rem;
+        .blog-post-btn img {
+            width: 55px;
+            height: 55px;
             margin-bottom: 10px;
+            transition: transform 0.3s ease;
         }
 
         .blog-post-btn:hover {
             transform: scale(1.05);
             box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .blog-post-btn:hover img {
+            transform: translateY(-5px);
         }
 
         .highlight-post {
@@ -191,7 +202,7 @@
         }
         .highlight-post:hover { background-color: var(--dark-purple); color: white;}
 
-        /* Modais (Pop-up Vintage) */
+        /* Modais */
         .modal {
             display: none;
             position: fixed;
@@ -236,7 +247,7 @@
             line-height: 1.6;
         }
 
-        /* Galeria de Fotos (Polaroids) */
+        /* Galeria de Fotos */
         .photo-section {
             margin-top: 15px;
             background: var(--bg-color);
@@ -318,7 +329,7 @@
             <div class="widget">
                 <h3>~*~ Personalizar ~*~</h3>
                 <label for="color-picker" style="cursor: pointer; display: flex; align-items: center; gap: 10px; font-weight: bold; color: var(--primary-purple);">
-                    <span style="font-size: 24px;">🖌️</span> Mudar Cor do Blog
+                    <img src="https://img.icons8.com/color/48/paint-brush.png" alt="Pincel" style="width: 24px; height: 24px;"> Mudar Cor do Blog
                 </label>
                 <!-- Este input invisível abre a paleta de cores do sistema! -->
                 <input type="color" id="color-picker" value="#8e44ad" style="opacity: 0; width: 0; height: 0;">
@@ -328,17 +339,19 @@
             <!-- Perfil -->
             <div class="widget">
                 <h3>~*~ Perfil ~*~</h3>
-                <div class="perfil-img">🖤</div>
+                <div class="perfil-img">
+                    <img src="https://img.icons8.com/color/96/magic-star.png" alt="Estrela Mágica">
+                </div>
                 <p><strong>Nome:</strong> Bruna Coi Santos</p>
                 <p><strong>Idade:</strong> 30 aninhos</p>
-                <p><strong>Vibe:</strong> Amo música, cantar, cantar, tocar e cantar kkkk, amooo frio, para mim faria frio sempre, poder usar minhas roupas confortáveis que tanto gosto, adoro ler, e se tem um lugar que não saio de casa é a cozinha, você sempre vai me ver cozinhando algo bem gostoso e saudável (com bastante tempero) e minhas paixões são o divo Justin Bieber e a deusa Kuromi!!!</p>
+                <p><strong>Vibe:</strong> Amo música, cantar, tocar e cantar kkkk, amooo frio, para mim faria frio sempre, poder usar minhas roupas confortáveis que tanto gosto, adoro ler, e se tem um lugar que não saio de casa é a cozinha, você sempre vai me ver cozinhando algo bem gostoso e saudável (com bastante tempero) e minhas paixões são o divo Justin Bieber e a deusa Kuromi!!!</p>
             </div>
 
-            <!-- Player do Restart (Atualizado com links direto) -->
+            <!-- Player do Restart (Atualizado com bypass de anúncios) -->
             <div class="widget">
                 <h3>MP3 Player - Restart</h3>
                 <div class="playlist-menu">
-                    <!-- Botões de Play com as IDs de vídeo exatas que você enviou -->
+                    <!-- Botões de Play -->
                     <button class="song-btn" onclick="tocarRestart('-7QVg1fIAt8', this)">▶ Lembranças</button>
                     <button class="song-btn" onclick="tocarRestart('di9ef5qLTMo', this)">▶ Final Feliz</button>
                     <button class="song-btn" onclick="tocarRestart('wPxnspl4t2c', this)">▶ Amanhecer no Teu Olhar</button>
@@ -350,45 +363,50 @@
             </div>
         </aside>
 
-        <!-- Posts (Botões das Surpresas) -->
+        <!-- Posts (Botões das Surpresas com Ícones Fofos) -->
         <main class="main-content">
             <div class="blog-post-btn" onclick="abrirJanela('janela-fotos')">
-                <span>📸</span>
+                <img src="https://img.icons8.com/color/96/camera--v1.png" alt="Câmera">
                 Álbum de Fotos
             </div>
             
-            <!-- Nova Categoria Musical -->
             <div class="blog-post-btn" onclick="abrirJanela('janela-musica')">
-                <span>🎤</span>
+                <img src="https://img.icons8.com/color/96/microphone.png" alt="Microfone">
                 Talento Musical
             </div>
 
             <div class="blog-post-btn" onclick="abrirJanela('janela-cardapio')">
-                <span>🍱</span>
+                <img src="https://img.icons8.com/color/96/banana.png" alt="Comida">
                 O Cardápio
             </div>
+            
             <div class="blog-post-btn" onclick="abrirJanela('janela-saude')">
-                <span>🫐</span>
+                <img src="https://img.icons8.com/color/96/watermelon.png" alt="Frutas">
                 Vida Saudável
             </div>
+            
             <div class="blog-post-btn" onclick="abrirJanela('janela-clima')">
-                <span>❄️</span>
+                <img src="https://img.icons8.com/color/96/winter.png" alt="Frio">
                 A Vibe Perfeita
             </div>
+            
             <div class="blog-post-btn" onclick="abrirJanela('janela-livros')">
-                <span>📖</span>
+                <img src="https://img.icons8.com/color/96/book.png" alt="Livros">
                 Vida Literária
             </div>
+            
             <div class="blog-post-btn" onclick="abrirJanela('janela-pipoca')">
-                <span>🍿</span>
+                <img src="https://img.icons8.com/color/96/popcorn.png" alt="Pipoca">
                 Sessão Pipoca
             </div>
+            
             <div class="blog-post-btn" onclick="abrirJanela('janela-kit')">
-                <span>🎨</span>
+                <img src="https://img.icons8.com/color/96/paint-palette.png" alt="Artes">
                 Kit Desenho
             </div>
+            
             <div class="blog-post-btn highlight-post" onclick="abrirJanela('janela-mensagem')">
-                <span>💜</span>
+                <img src="https://img.icons8.com/color/96/gift--v1.png" alt="Presente">
                 Mensagem Especial
             </div>
         </main>
@@ -409,7 +427,6 @@
                 <div class="photo-section">
                     <strong>Fotos da Bruna</strong>
                     <div class="photo-grid">
-                        <!-- BINHO: Cole o link da foto da Bruna dentro do src="" -->
                         <div class="polaroid">
                             <img src="" alt="Foto Bruna 1">
                             A mais linda
@@ -424,7 +441,6 @@
                 <div class="photo-section">
                     <strong>Fotos Nossas</strong>
                     <div class="photo-grid" id="grid-fotos-nossas">
-                        <!-- BINHO: Cole o link da foto de VOCÊS dentro do src="" -->
                         <div class="polaroid">
                             <img src="" alt="Foto Nossa">
                             Nós 💜
@@ -432,7 +448,6 @@
                         
                         <label class="upload-btn">
                             📷 Tirar Foto Agora
-                            <!-- Abre a câmera do celular -->
                             <input type="file" accept="image/*" capture="environment" id="camera-input">
                         </label>
                     </div>
@@ -554,16 +569,16 @@
             document.documentElement.style.setProperty('--base-color', e.target.value);
         });
 
-        // 2. PLAYER DO YOUTUBE DIRETO PELO ID
+        // 2. PLAYER DO YOUTUBE (TENTATIVA DE BLOQUEIO DE ANÚNCIO VIA NO-COOKIE)
         function tocarRestart(videoId, btn) {
-            // Remove a seleção dos outros botões
             document.querySelectorAll('.song-btn').forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
 
-            // Insere diretamente o vídeo exato que você enviou usando a ID do YouTube.
-            // O código embed funciona nativamente e passa por cima do bloqueio 153.
+            // TRUQUE PARA BURLAR ANÚNCIOS:
+            // Troquei o youtube.com por youtube-nocookie.com (Domínio sem rastreamento de anúncios).
+            // E adicionei rel=0 (Não mostra vídeos recomendados de canais aleatórios) e iv_load_policy=3 (Esconde anotações/cards de anúncios).
             const player = document.getElementById('player-youtube');
-            player.innerHTML = `<iframe width="100%" height="80" src="https://www.youtube.com/embed/${videoId}?autoplay=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
+            player.innerHTML = `<iframe width="100%" height="80" src="https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&rel=0&iv_load_policy=3" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
         }
 
         // 3. CAIXAS POP-UP
