@@ -334,16 +334,16 @@
                 <p><strong>Vibe:</strong> Amo música, cantar, cantar, tocar e cantar kkkk, amooo frio, para mim faria frio sempre, poder usar minhas roupas confortáveis que tanto gosto, adoro ler, e se tem um lugar que não saio de casa é a cozinha, você sempre vai me ver cozinhando algo bem gostoso e saudável (com bastante tempero) e minhas paixões são o divo Justin Bieber e a deusa Kuromi!!!</p>
             </div>
 
-            <!-- Player do Restart -->
+            <!-- Player do Restart (Atualizado com links direto) -->
             <div class="widget">
                 <h3>MP3 Player - Restart</h3>
                 <div class="playlist-menu">
-                    <!-- Botões de Play -->
-                    <button class="song-btn" onclick="tocarRestart('Lembranças', this)">▶ Lembranças</button>
-                    <button class="song-btn" onclick="tocarRestart('Final Feliz', this)">▶ Final Feliz</button>
-                    <button class="song-btn" onclick="tocarRestart('Amanhecer no teu olhar', this)">▶ Amanhecer no Teu Olhar</button>
+                    <!-- Botões de Play com as IDs de vídeo exatas que você enviou -->
+                    <button class="song-btn" onclick="tocarRestart('-7QVg1fIAt8', this)">▶ Lembranças</button>
+                    <button class="song-btn" onclick="tocarRestart('di9ef5qLTMo', this)">▶ Final Feliz</button>
+                    <button class="song-btn" onclick="tocarRestart('wPxnspl4t2c', this)">▶ Amanhecer no Teu Olhar</button>
                 </div>
-                <!-- Mini tela do vídeo (Resolvido o Erro 153) -->
+                <!-- Mini tela do vídeo -->
                 <div id="player-youtube">
                     <p style="font-size: 11px; text-align: center; color: #777; margin-top: 10px;">(Clique em uma música para dar o Play)</p>
                 </div>
@@ -540,7 +540,7 @@
                 <button class="close-btn" onclick="fecharJanela('janela-mensagem')">X</button>
             </div>
             <div class="modal-body">
-                <p>Amor, quero te desejar o melhor aniversário do mundo. Trinta anos é um algo lindo! Que essa nova fase seja incrível, cheia de paz, saúde, conquistas, mimos da Kuromi e as melhores músicas tocando de fundo sempre alegrando seus dias. Você é uma pessoa muito especial para mim. E quero sempre o melhor para você. Aproveite o seu dia e sua vida ao máximo, você merece o universo todinho meu amor. :3</p>
+                <p>Amor, quero te desejar o melhor aniversário do mundo. Trinta anos é algo lindo! Que essa nova fase seja incrível, cheia de paz, saúde, conquistas, mimos da Kuromi e as melhores músicas tocando de fundo sempre alegrando seus dias. Você é uma pessoa muito especial para mim. E quero sempre o melhor para você. Aproveite o seu dia e sua vida ao máximo, você merece o universo todinho meu amor. :3</p>
                 <p style="font-family: 'Pacifico', cursive; color: var(--primary-purple); margin-top: 20px; font-size: 1.5rem;">Com carinho, Binho</p>
             </div>
         </div>
@@ -551,22 +551,19 @@
         // 1. SISTEMA DE TROCAR A COR DO SITE INTEIRO (PINCEL MÁGICO)
         const colorPicker = document.getElementById('color-picker');
         colorPicker.addEventListener('input', function(e) {
-            // Pega a cor que a Bruna escolheu e aplica como base do CSS. 
-            // O próprio CSS fará o cálculo para gerar o fundo claro e as bordas escuras!
             document.documentElement.style.setProperty('--base-color', e.target.value);
         });
 
-        // 2. PLAYER DO YOUTUBE CORRIGIDO (ERRO 153)
-        function tocarRestart(nomeMusica, btn) {
+        // 2. PLAYER DO YOUTUBE DIRETO PELO ID
+        function tocarRestart(videoId, btn) {
+            // Remove a seleção dos outros botões
             document.querySelectorAll('.song-btn').forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
 
-            // TRUQUE: Ao colocar "letra" no final, o YouTube pega os "Lyric Videos" feitos por fãs. 
-            // Isso evita 99% das vezes o "Erro 153", que só bloqueia clipes oficiais em arquivos locais do PC.
-            const termoBusca = encodeURIComponent("Restart " + nomeMusica + " letra");
+            // Insere diretamente o vídeo exato que você enviou usando a ID do YouTube.
+            // O código embed funciona nativamente e passa por cima do bloqueio 153.
             const player = document.getElementById('player-youtube');
-            
-            player.innerHTML = `<iframe width="100%" height="80" src="https://www.youtube.com/embed?listType=search&list=${termoBusca}&autoplay=1" title="Playlist Restart" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>`;
+            player.innerHTML = `<iframe width="100%" height="80" src="https://www.youtube.com/embed/${videoId}?autoplay=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
         }
 
         // 3. CAIXAS POP-UP
