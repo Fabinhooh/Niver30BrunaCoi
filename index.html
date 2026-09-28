@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog da Bruna - De Repente 30</title>
+    
+    <!-- Biblioteca de Confetes -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+
+    <style>
+        /* FONTES CLÁSSICAS DOS ANOS 2010 */
+        @import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
+
+        /* O Pincel Mágico: O CSS calcula todas as cores secundárias baseadas na cor principal! */
+        :root {
+            --base-color: #8e44ad; /* Roxo padrão (Kuromi) */
+            
+            --primary-purple: var(--base-color);
+            --light-purple: color-mix(in srgb, var(--base-color) 40%, white);
+            --dark-purple: color-mix(in srgb, var(--base-color) 60%, black);
+            --bg-color: color-mix(in srgb, var(--base-color) 12%, white);
+            --text-color: #2c3e50;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-color);
+            /* Estampa de bolinhas bem 2010s */
+            background-image: radial-gradient(var(--light-purple) 2px, transparent 2px);
+            background-size: 20px 20px;
+            color: var(--text-color);
+            font-family: 'Tahoma', 'Verdana', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transition: background 0.5s ease; /* Animação suave ao mudar de cor */
+        }
+
+        /* Texto Correndo Clássico */
+        .marquee-container {
+            width: 100%;
+            background-color: var(--primary-purple);
+            color: white;
+            font-size: 14px;
+            padding: 5px 0;
+            font-weight: bold;
+            border-bottom: 3px dashed var(--dark-purple);
+        }
+
+        /* Container do Blog (Responsivo) */
+        #blog-container {
+            width: 95%;
+            max-width: 900px;
+            margin: 20px auto;
+            background-color: rgba(255, 255, 255, 0.95);
+            border: 3px dashed var(--primary-purple);
+            border-radius: 15px;
+            box-shadow: 5px 5px 15px rgba(0,0,0,0.1);
+            overflow: hidden;
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        /* Cabeçalho do Blog */
+        .blog-header {
+            width: 100%;
+            text-align: center;
+            padding: 30px 10px;
+            border-bottom: 3px dotted var(--light-purple);
+            background-color: #fff;
+        }
+
+        .blog-header h1 {
+            font-family: 'Pacifico', cursive;
+            color: var(--primary-purple);
+            font-size: 2.8rem;
+            margin: 0;
+            text-shadow: 2px 2px 0px var(--light-purple);
+        }
+
+        .blog-header p {
+            color: var(--dark-purple);
+            font-style: italic;
+            font-size: 14px;
+        }
+
+        /* Sidebar (Fica em cima no celular, do lado no PC) */
+        .sidebar {
+            flex: 1 1 250px;
+            padding: 20px;
+            background-color: var(--bg-color);
+            border-right: 3px dotted var(--light-purple);
+        }
+
+        .widget {
+            margin-bottom: 30px;
+            background: #fff;
+            padding: 15px;
+            border: 1px solid var(--light-purple);
+            border-radius: 10px;
+            box-shadow: 2px 2px 0px var(--light-purple);
+        }
+
+        .widget h3 {
+            font-size: 1.1rem;
+            color: var(--primary-purple);
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 5px;
+            margin-top: 0;
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+        }
+
+        .perfil-img {
+            width: 100px;
+            height: 100px;
+            background-color: var(--light-purple);
+            border-radius: 50%;
+            margin: 0 auto 10px;
+            display: block;
+            border: 3px solid var(--primary-purple);
+            text-align: center;
+            line-height: 100px;
+            font-size: 40px;
+        }
+
+        /* Botões da Playlist */
+        .playlist-menu {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            margin-bottom: 10px;
+        }
+
+        .song-btn {
+            background-color: #fff;
+            border: 1px solid var(--primary-purple);
+            color: var(--dark-purple);
+            padding: 5px;
+            cursor: pointer;
+            font-family: 'Tahoma', sans-serif;
+            font-size: 11px;
+            text-align: left;
+            border-radius: 3px;
+        }
+
+        .song-btn.active, .song-btn:hover {
+            background-color: var(--primary-purple);
+            color: white;
+        }
+
+        /* Área de Posts / Botões */
+        .main-content {
+            flex: 2 1 400px;
+            padding: 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 15px;
+            align-content: start;
+        }
+
+        /* Botões de Categorias */
+        .blog-post-btn {
+            background: #fff;
+            border: 2px dashed var(--primary-purple);
+            border-radius: 10px;
+            padding: 20px 10px;
+            text-align: center;
+            cursor: pointer;
+            transition: 0.2s;
+            color: var(--dark-purple);
+            font-weight: bold;
+        }
+
+        .blog-post-btn span {
+            display: block;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .blog-post-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .highlight-post {
+            background-color: var(--primary-purple);
+            color: white;
+            border-style: solid;
+        }
+        .highlight-post:hover { background-color: var(--dark-purple); color: white;}
+
+        /* Modais (Pop-up Vintage) */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-color: rgba(0, 0, 0, 0.6);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .modal-content {
+            background-color: #fff;
+            border: 4px solid var(--primary-purple);
+            border-radius: 0; 
+            width: 90%;
+            max-width: 500px;
+            box-shadow: 10px 10px 0px rgba(0, 0, 0, 0.3);
+        }
+
+        .modal-header {
+            background-color: var(--primary-purple);
+            color: white;
+            padding: 10px;
+            font-weight: bold;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-header .close-btn {
+            background: red;
+            color: white;
+            border: 1px solid darkred;
+            cursor: pointer;
+            font-weight: bold;
+            padding: 2px 6px;
+        }
+
+        .modal-body {
+            padding: 20px;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        /* Galeria de Fotos (Polaroids) */
+        .photo-section {
+            margin-top: 15px;
+            background: var(--bg-color);
+            padding: 10px;
+            border: 1px dashed var(--primary-purple);
+        }
+
+        .photo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 15px;
+            margin-top: 10px;
+        }
+
+        .polaroid {
+            background: white;
+            padding: 5px 5px 15px 5px;
+            box-shadow: 2px 2px 5px rgba(0,0,0,0.2);
+            text-align: center;
+            font-family: 'Comic Sans MS', cursive;
+            font-size: 11px;
+            color: #555;
+        }
+
+        .polaroid img {
+            width: 100%;
+            height: 120px;
+            object-fit: cover;
+            border: 1px solid #ddd;
+            background: #eee;
+        }
+
+        /* Botão de Câmera */
+        .upload-btn {
+            background-color: var(--primary-purple);
+            color: white;
+            padding: 10px;
+            border: none;
+            cursor: pointer;
+            text-align: center;
+            font-size: 12px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 120px;
+            border-radius: 5px;
+            font-family: 'Tahoma', sans-serif;
+            transition: 0.3s;
+        }
+        .upload-btn:hover { background-color: var(--dark-purple); }
+        .upload-btn input { display: none; }
+
+        @media (max-width: 600px) {
+            .sidebar { border-right: none; border-bottom: 3px dotted var(--light-purple); }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Texto Marquee dos anos 2010 -->
+    <div class="marquee-container">
+        <marquee scrollamount="5">✿ Bem-vindos ao Blog da Bruna! ✿ Onde a magia dos 30 anos acontece! ✿ ~*~ Ouvindo Restart no último volume ~*~ ✿</marquee>
+    </div>
+
+    <!-- Estrutura Principal do Blog -->
+    <div id="blog-container">
+        
+        <!-- Cabeçalho -->
+        <header class="blog-header">
+            <h1>De Repente 30 da Bruna</h1>
+            <p>Criado em: 30/09/1996 | Views: 9.999</p>
+        </header>
+
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            
+            <!-- PINCEL MÁGICO (Paleta de Cores) -->
+            <div class="widget">
+                <h3>~*~ Personalizar ~*~</h3>
+                <label for="color-picker" style="cursor: pointer; display: flex; align-items: center; gap: 10px; font-weight: bold; color: var(--primary-purple);">
+                    <span style="font-size: 24px;">🖌️</span> Mudar Cor do Blog
+                </label>
+                <!-- Este input invisível abre a paleta de cores do sistema! -->
+                <input type="color" id="color-picker" value="#8e44ad" style="opacity: 0; width: 0; height: 0;">
+                <p style="font-size: 10px; margin-top: 5px; color: #777;">Clique no pincel para pintar o site!</p>
+            </div>
+
+            <!-- Perfil -->
+            <div class="widget">
+                <h3>~*~ Perfil ~*~</h3>
+                <div class="perfil-img">🖤</div>
+                <p><strong>Nome:</strong> Bruna Coi Santos</p>
+                <p><strong>Idade:</strong> 30 aninhos</p>
+                <p><strong>Vibe:</strong> Amo música, cantar, cantar, tocar e cantar kkkk, amooo frio, para mim faria frio sempre, poder usar minhas roupas confortáveis que tanto gosto, adoro ler, e se tem um lugar que não saio de casa é a cozinha, você sempre vai me ver cozinhando algo bem gostoso e saudável (com bastante tempero) e minhas paixões são o divo Justin Bieber e a deusa Kuromi!!!</p>
+            </div>
+
+            <!-- Player do Restart -->
+            <div class="widget">
+                <h3>MP3 Player - Restart</h3>
+                <div class="playlist-menu">
+                    <!-- Botões de Play -->
+                    <button class="song-btn" onclick="tocarRestart('Lembranças', this)">▶ Lembranças</button>
+                    <button class="song-btn" onclick="tocarRestart('Final Feliz', this)">▶ Final Feliz</button>
+                    <button class="song-btn" onclick="tocarRestart('Amanhecer no teu olhar', this)">▶ Amanhecer no Teu Olhar</button>
+                </div>
+                <!-- Mini tela do vídeo (Resolvido o Erro 153) -->
+                <div id="player-youtube">
+                    <p style="font-size: 11px; text-align: center; color: #777; margin-top: 10px;">(Clique em uma música para dar o Play)</p>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Posts (Botões das Surpresas) -->
+        <main class="main-content">
+            <div class="blog-post-btn" onclick="abrirJanela('janela-fotos')">
+                <span>📸</span>
+                Álbum de Fotos
+            </div>
+            
+            <!-- Nova Categoria Musical -->
+            <div class="blog-post-btn" onclick="abrirJanela('janela-musica')">
+                <span>🎤</span>
+                Talento Musical
+            </div>
+
+            <div class="blog-post-btn" onclick="abrirJanela('janela-cardapio')">
+                <span>🍱</span>
+                O Cardápio
+            </div>
+            <div class="blog-post-btn" onclick="abrirJanela('janela-saude')">
+                <span>🫐</span>
+                Vida Saudável
+            </div>
+            <div class="blog-post-btn" onclick="abrirJanela('janela-clima')">
+                <span>❄️</span>
+                A Vibe Perfeita
+            </div>
+            <div class="blog-post-btn" onclick="abrirJanela('janela-livros')">
+                <span>📖</span>
+                Vida Literária
+            </div>
+            <div class="blog-post-btn" onclick="abrirJanela('janela-pipoca')">
+                <span>🍿</span>
+                Sessão Pipoca
+            </div>
+            <div class="blog-post-btn" onclick="abrirJanela('janela-kit')">
+                <span>🎨</span>
+                Kit Desenho
+            </div>
+            <div class="blog-post-btn highlight-post" onclick="abrirJanela('janela-mensagem')">
+                <span>💜</span>
+                Mensagem Especial
+            </div>
+        </main>
+    </div>
+
+    <!-- ================= MODAIS (JANELAS POP-UP VINTAGE) ================= -->
+
+    <!-- ÁLBUM DE FOTOS -->
+    <div id="janela-fotos" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <span>C:\Meus_Documentos\Fotos_Bruna.exe</span>
+                <button class="close-btn" onclick="fecharJanela('janela-fotos')">X</button>
+            </div>
+            <div class="modal-body" style="max-height: 70vh; overflow-y: auto;">
+                <p>Nossas lembranças registradas na câmera digital! 📸</p>
+                
+                <div class="photo-section">
+                    <strong>Fotos da Bruna</strong>
+                    <div class="photo-grid">
+                        <!-- BINHO: Cole o link da foto da Bruna dentro do src="" -->
+                        <div class="polaroid">
+                            <img src="" alt="Foto Bruna 1">
+                            A mais linda
+                        </div>
+                        <div class="polaroid">
+                            <img src="" alt="Foto Bruna 2">
+                            Maravilhosa
+                        </div>
+                    </div>
+                </div>
+
+                <div class="photo-section">
+                    <strong>Fotos Nossas</strong>
+                    <div class="photo-grid" id="grid-fotos-nossas">
+                        <!-- BINHO: Cole o link da foto de VOCÊS dentro do src="" -->
+                        <div class="polaroid">
+                            <img src="" alt="Foto Nossa">
+                            Nós 💜
+                        </div>
+                        
+                        <label class="upload-btn">
+                            📷 Tirar Foto Agora
+                            <!-- Abre a câmera do celular -->
+                            <input type="file" accept="image/*" capture="environment" id="camera-input">
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MÚSICA E VOCAÇÃO -->
+    <div id="janela-musica" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <span>Vocacao_Musical.txt</span>
+                <button class="close-btn" onclick="fecharJanela('janela-musica')">X</button>
+            </div>
+            <div class="modal-body">
+                <p>Eu sei que você tem um dom incrível para a música! Seja soltando a voz, dedilhando o violão ou arrasando no teclado, o mundo fica muito mais bonito quando você coloca essa vocação para fora. Com ídolos como Justin Bieber e Restart como inspiração. As músicas nostálgicas que você canta tão bem! Eu só quero te pedir uma coisa: nunca pare de cantar e tocar. Continue fazendo muito isso que você tanto gosta, pois o seu talento ilumina qualquer lugar!</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- CARDÁPIO -->
+    <div id="janela-cardapio" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <span>Aviso_Importante.txt</span>
+                <button class="close-btn" onclick="fecharJanela('janela-cardapio')">X</button>
+            </div>
+            <div class="modal-body">
+                <p>Como não se lembrar do seu bolo de banana com aveia tão gostoso que só você sabe fazer? E tantas receitas que você inventa "no olho" kkkk. Só te peço uma coisa: jamais se esqueça de colocar BASTANTE tempero nas suas comidinhas, exatamente do jeitinho que você tanto ama!</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- SAÚDE -->
+    <div id="janela-saude" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <span>Dica_de_Saude.txt</span>
+                <button class="close-btn" onclick="fecharJanela('janela-saude')">X</button>
+            </div>
+            <div class="modal-body">
+                <p>Já bebeu água hoje? Como você sabe muito bem, hidratação e alimentação saudável são essenciais! O seu menu perfeito sempre vai ter espaço para suas comidinhas, seja a boa abóbora (seja a Menina ou a Cabotia). E de sobremesa? Um prato lindo de Melão, Caqui Fuyu, Blueberry e Cereja Chilena. Um brinde com muita água para sua saúde!!</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- CLIMA E VIBE -->
+    <div id="janela-clima" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <span>Previsao_Tempo.txt</span>
+                <button class="close-btn" onclick="fecharJanela('janela-clima')">X</button>
+            </div>
+            <div class="modal-body">
+                <p>Se dependesse de você, hoje faria aquele frio maravilhoso, bem longe do calor que você detesta! O seu dia perfeito pede roupas bem confortáveis (para se sentir super bem) e aproveitar o seu momento de paz!</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- LITERATURA -->
+    <div id="janela-livros" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <span>ACOTAR_Fans.txt</span>
+                <button class="close-btn" onclick="fecharJanela('janela-livros')">X</button>
+            </div>
+            <div class="modal-body">
+                <p>Você já leu tantas histórias épicas e fantásticas, mas pra mim, a história mais incrível de todas é a sua. Feliz aniversário para a verdadeira Grã-Senhora dessa corte! Que a Sarah J. Maas tenha inveja da jornada maravilhosa que são os seus 30 anos.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- PIPOCA -->
+    <div id="janela-pipoca" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <span>Sessao_Disney.txt</span>
+                <button class="close-btn" onclick="fecharJanela('janela-pipoca')">X</button>
+            </div>
+            <div class="modal-body">
+                <p>Hoje o dia é todo seu! Merece voar pelos céus com o Banguela, desbravar os mares com a Moana e dar muitas risadas com o Mike Wazowski, e não podemos esquecer do Shrek. Afinal, a magia da Disney e do Mickey combinam perfeitamente com a alegria que você espalha por aí!</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- KIT -->
+    <div id="janela-kit" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <span>Papelaria.txt</span>
+                <button class="close-btn" onclick="fecharJanela('janela-kit')">X</button>
+            </div>
+            <div class="modal-body">
+                <p>Espero que essa sua nova fase seja tão colorida quanto os seus desenhos! Que nunca falte tempo para você pintar, desenhar e comprar mais as coisas de papelaria que você adora.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- MENSAGEM FINAL (Confetes) -->
+    <div id="janela-mensagem" class="modal">
+        <div class="modal-content">
+            <div class="modal-header" style="background-color: var(--dark-purple);">
+                <span>♥_Feliz_Aniversario_♥.exe</span>
+                <button class="close-btn" onclick="fecharJanela('janela-mensagem')">X</button>
+            </div>
+            <div class="modal-body">
+                <p>Amor, quero te desejar o melhor aniversário do mundo. Trinta anos é um algo lindo! Que essa nova fase seja incrível, cheia de paz, saúde, conquistas, mimos da Kuromi e as melhores músicas tocando de fundo sempre alegrando seus dias. Você é uma pessoa muito especial para mim. E quero sempre o melhor para você. Aproveite o seu dia e sua vida ao máximo, você merece o universo todinho meu amor. :3</p>
+                <p style="font-family: 'Pacifico', cursive; color: var(--primary-purple); margin-top: 20px; font-size: 1.5rem;">Com carinho, Binho</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- SCRIPTS MÁGICOS -->
+    <script>
+        // 1. SISTEMA DE TROCAR A COR DO SITE INTEIRO (PINCEL MÁGICO)
+        const colorPicker = document.getElementById('color-picker');
+        colorPicker.addEventListener('input', function(e) {
+            // Pega a cor que a Bruna escolheu e aplica como base do CSS. 
+            // O próprio CSS fará o cálculo para gerar o fundo claro e as bordas escuras!
+            document.documentElement.style.setProperty('--base-color', e.target.value);
+        });
+
+        // 2. PLAYER DO YOUTUBE CORRIGIDO (ERRO 153)
+        function tocarRestart(nomeMusica, btn) {
+            document.querySelectorAll('.song-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+
+            // TRUQUE: Ao colocar "letra" no final, o YouTube pega os "Lyric Videos" feitos por fãs. 
+            // Isso evita 99% das vezes o "Erro 153", que só bloqueia clipes oficiais em arquivos locais do PC.
+            const termoBusca = encodeURIComponent("Restart " + nomeMusica + " letra");
+            const player = document.getElementById('player-youtube');
+            
+            player.innerHTML = `<iframe width="100%" height="80" src="https://www.youtube.com/embed?listType=search&list=${termoBusca}&autoplay=1" title="Playlist Restart" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>`;
+        }
+
+        // 3. CAIXAS POP-UP
+        function abrirJanela(id) {
+            document.getElementById(id).style.display = 'flex';
+            if(id === 'janela-mensagem') {
+                dispararConfetes();
+            }
+        }
+
+        function fecharJanela(id) {
+            document.getElementById(id).style.display = 'none';
+        }
+
+        window.onclick = function(event) {
+            if (event.target.classList.contains('modal')) {
+                event.target.style.display = 'none';
+            }
+        }
+
+        // 4. CÂMERA FOTOGRÁFICA
+        const cameraInput = document.getElementById('camera-input');
+        const gridNossasFotos = document.getElementById('grid-fotos-nossas');
+
+        window.onload = function() {
+            const fotoSalva = localStorage.getItem('foto_bruna_nova');
+            if (fotoSalva) { renderizarFoto(fotoSalva); }
+        }
+
+        cameraInput.addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(event) {
+                    const base64DaFoto = event.target.result;
+                    localStorage.setItem('foto_bruna_nova', base64DaFoto);
+                    renderizarFoto(base64DaFoto);
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
+        function renderizarFoto(base64DaFoto) {
+            let fotoExistente = document.getElementById('foto-inserida-pelo-usuario');
+            if (!fotoExistente) {
+                const polaroidDiv = document.createElement('div');
+                polaroidDiv.className = 'polaroid';
+                polaroidDiv.id = 'foto-inserida-pelo-usuario';
+                
+                const img = document.createElement('img');
+                img.src = base64DaFoto;
+                
+                const legenda = document.createElement('div');
+                legenda.innerText = 'Hoje 💜';
+
+                polaroidDiv.appendChild(img);
+                polaroidDiv.appendChild(legenda);
+                gridNossasFotos.insertBefore(polaroidDiv, cameraInput.parentElement);
+            } else {
+                fotoExistente.querySelector('img').src = base64DaFoto;
+            }
+        }
+
+        // 5. CONFETES
+        function dispararConfetes() {
+            var duration = 3000;
+            var end = Date.now() + duration;
+
+            (function frame() {
+                confetti({ particleCount: 5, angle: 60, spread: 55, origin: { x: 0 }, colors: ['#8e44ad', '#c39bd3', '#ffffff', '#000000'] });
+                confetti({ particleCount: 5, angle: 120, spread: 55, origin: { x: 1 }, colors: ['#8e44ad', '#c39bd3', '#ffffff', '#000000'] });
+                if (Date.now() < end) { requestAnimationFrame(frame); }
+            }());
+        }
+    </script>
+</body>
+</html>
