@@ -34,6 +34,13 @@
             flex-direction: column;
             align-items: center;
             transition: background 0.5s ease;
+            
+            /* Cursor de estrelinha! Bem anos 2010 */
+            cursor: url('https://cur.cursors-4u.net/symbols/sym-1/sym46.cur'), auto !important;
+        }
+
+        a, button, input {
+            cursor: url('https://cur.cursors-4u.net/symbols/sym-1/sym46.cur'), pointer !important;
         }
 
         /* Texto Correndo Clássico */
@@ -47,46 +54,83 @@
             border-bottom: 3px dashed var(--dark-purple);
         }
 
-        /* Container do Blog */
+        /* Container Principal */
         #blog-container {
             width: 95%;
-            max-width: 900px;
+            max-width: 950px;
             margin: 20px auto;
             background-color: rgba(255, 255, 255, 0.95);
-            border: 3px dashed var(--primary-purple);
-            border-radius: 15px;
-            box-shadow: 5px 5px 15px rgba(0,0,0,0.1);
+            border: 3px solid var(--primary-purple);
+            border-radius: 10px;
+            box-shadow: 5px 5px 15px rgba(0,0,0,0.2);
             overflow: hidden;
             display: flex;
             flex-wrap: wrap;
         }
 
-        /* Cabeçalho do Blog */
+        /* ================= CAPA E PERFIL ================= */
         .blog-header {
             width: 100%;
-            text-align: center;
-            padding: 30px 10px;
-            border-bottom: 3px dotted var(--light-purple);
+            position: relative;
             background-color: #fff;
+            border-bottom: 4px dotted var(--light-purple);
         }
 
-        .blog-header h1 {
+        .cover-photo {
+            width: 100%;
+            height: 250px;
+            background-color: #2c003e; /* Cor de fundo caso a imagem demore a carregar */
+            overflow: hidden;
+        }
+
+        .cover-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .profile-section {
+            display: flex;
+            align-items: flex-end;
+            padding: 0 30px;
+            margin-top: -60px; /* Faz a foto subir na capa */
+            position: relative;
+            z-index: 2;
+        }
+
+        .perfil-img {
+            width: 140px;
+            height: 140px;
+            background-color: var(--light-purple);
+            border-radius: 5px; /* Estilo Polaroid/Orkut quadrado */
+            border: 5px solid white;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+        
+        .perfil-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .profile-info {
+            margin-left: 20px;
+            margin-bottom: 15px;
+            text-shadow: 1px 1px 2px white, -1px -1px 2px white;
+        }
+
+        .profile-info h1 {
             font-family: 'Pacifico', cursive;
             color: var(--primary-purple);
-            font-size: 2.8rem;
+            font-size: 2.5rem;
             margin: 0;
-            text-shadow: 2px 2px 0px var(--light-purple);
+            line-height: 1;
         }
 
-        .blog-header p {
-            color: var(--dark-purple);
-            font-style: italic;
-            font-size: 14px;
-        }
-
-        /* Sidebar */
+        /* ================= SIDEBAR ================= */
         .sidebar {
-            flex: 1 1 250px;
+            flex: 1 1 280px;
             padding: 20px;
             background-color: var(--bg-color);
             border-right: 3px dotted var(--light-purple);
@@ -110,24 +154,44 @@
             font-family: 'Comic Sans MS', cursive, sans-serif;
         }
 
-        .perfil-img {
-            width: 100px;
-            height: 100px;
-            background-color: var(--light-purple);
-            border-radius: 50%;
-            margin: 0 auto 10px;
+        /* Player Kuromi */
+        .kuromi-frame {
+            border: 4px solid #1a1a1a;
+            border-radius: 12px;
+            padding: 10px;
+            background-color: #2c003e; /* Roxo bem escuro/gótico */
+            box-shadow: 0 0 12px var(--primary-purple);
+            position: relative;
+            text-align: center;
+        }
+
+        .kuromi-frame::before {
+            content: "🖤💀 Player Kuromi 💀🖤";
+            display: block;
+            color: #fff;
+            font-size: 12px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            font-family: 'Comic Sans MS', cursive;
+            letter-spacing: 1px;
+        }
+
+        #player-youtube {
+            width: 100%;
+            aspect-ratio: 16 / 9; /* Mantém a proporção do vídeo sem cortar! */
+            background-color: #000;
+            border-radius: 5px;
+            overflow: hidden;
             display: flex;
             align-items: center;
             justify-content: center;
-            border: 3px solid var(--primary-purple);
-        }
-        
-        .perfil-img img {
-            width: 60px;
-            height: 60px;
         }
 
-        /* Botões da Playlist */
+        #player-youtube iframe {
+            width: 100%;
+            height: 100%;
+        }
+
         .playlist-menu {
             display: flex;
             flex-direction: column;
@@ -140,7 +204,6 @@
             border: 1px solid var(--primary-purple);
             color: var(--dark-purple);
             padding: 5px;
-            cursor: pointer;
             font-family: 'Tahoma', sans-serif;
             font-size: 11px;
             text-align: left;
@@ -152,499 +215,411 @@
             color: white;
         }
 
-        /* Área de Posts / Botões */
-        .main-content {
-            flex: 2 1 400px;
-            padding: 20px;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-            gap: 15px;
-            align-content: start;
+        /* Selos de Fã / Badges */
+        .badges {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+            justify-content: center;
+        }
+        .badge {
+            background-color: var(--light-purple);
+            color: #fff;
+            padding: 3px 8px;
+            border-radius: 15px;
+            font-size: 10px;
+            font-weight: bold;
+            border: 1px solid var(--dark-purple);
         }
 
-        /* Botões de Categorias (Atualizado para Imagens) */
-        .blog-post-btn {
-            background: #fff;
+        /* ================= ÁREA DE CONTEÚDO (MURAL E FOTOS) ================= */
+        .main-content {
+            flex: 2 1 450px;
+            padding: 20px;
+        }
+
+        /* Botões dos Álbuns do Google Photos */
+        .albums-section {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 30px;
+            justify-content: center;
+        }
+
+        .album-btn {
+            background: linear-gradient(to bottom, #fff, var(--bg-color));
             border: 2px dashed var(--primary-purple);
             border-radius: 10px;
-            padding: 20px 10px;
+            padding: 15px;
             text-align: center;
-            cursor: pointer;
-            transition: 0.2s;
+            text-decoration: none;
             color: var(--dark-purple);
             font-weight: bold;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .blog-post-btn img {
-            width: 55px;
-            height: 55px;
-            margin-bottom: 10px;
-            transition: transform 0.3s ease;
-        }
-
-        .blog-post-btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-        }
-        
-        .blog-post-btn:hover img {
-            transform: translateY(-5px);
-        }
-
-        .highlight-post {
-            background-color: var(--primary-purple);
-            color: white;
-            border-style: solid;
-        }
-        .highlight-post:hover { background-color: var(--dark-purple); color: white;}
-
-        /* Modais */
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background-color: rgba(0, 0, 0, 0.6);
-            justify-content: center;
-            align-items: center;
-            z-index: 1000;
-        }
-
-        .modal-content {
-            background-color: #fff;
-            border: 4px solid var(--primary-purple);
-            border-radius: 0; 
-            width: 90%;
-            max-width: 500px;
-            box-shadow: 10px 10px 0px rgba(0, 0, 0, 0.3);
-        }
-
-        .modal-header {
-            background-color: var(--primary-purple);
-            color: white;
-            padding: 10px;
-            font-weight: bold;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .modal-header .close-btn {
-            background: red;
-            color: white;
-            border: 1px solid darkred;
-            cursor: pointer;
-            font-weight: bold;
-            padding: 2px 6px;
-        }
-
-        .modal-body {
-            padding: 20px;
-            font-size: 14px;
-            line-height: 1.6;
-        }
-
-        /* Galeria de Fotos */
-        .photo-section {
-            margin-top: 15px;
-            background: var(--bg-color);
-            padding: 10px;
-            border: 1px dashed var(--primary-purple);
-        }
-
-        .photo-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-            gap: 15px;
-            margin-top: 10px;
-        }
-
-        .polaroid {
-            background: white;
-            padding: 5px 5px 15px 5px;
-            box-shadow: 2px 2px 5px rgba(0,0,0,0.2);
-            text-align: center;
-            font-family: 'Comic Sans MS', cursive;
-            font-size: 11px;
-            color: #555;
-        }
-
-        .polaroid img {
-            width: 100%;
-            height: 120px;
-            object-fit: cover;
-            border: 1px solid #ddd;
-            background: #eee;
-        }
-
-        /* Botão de Câmera */
-        .upload-btn {
-            background-color: var(--primary-purple);
-            color: white;
-            padding: 10px;
-            border: none;
-            cursor: pointer;
-            text-align: center;
-            font-size: 12px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 120px;
-            border-radius: 5px;
-            font-family: 'Tahoma', sans-serif;
+            width: 140px;
             transition: 0.3s;
         }
-        .upload-btn:hover { background-color: var(--dark-purple); }
-        .upload-btn input { display: none; }
+
+        .album-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 10px var(--light-purple);
+        }
+
+        .album-btn img {
+            width: 50px;
+            height: 50px;
+            margin-bottom: 5px;
+        }
+
+        /* Título da Seção do Mural */
+        .section-title {
+            font-family: 'Pacifico', cursive;
+            color: var(--primary-purple);
+            font-size: 2rem;
+            border-bottom: 2px solid var(--light-purple);
+            margin-bottom: 20px;
+            padding-bottom: 5px;
+        }
+
+        /* Estilo dos Recados (Scraps estilo Orkut) */
+        .scrap {
+            background-color: #fff;
+            border: 1px solid var(--light-purple);
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 20px;
+            box-shadow: 2px 2px 5px rgba(0,0,0,0.05);
+            position: relative;
+        }
+
+        .scrap-header {
+            display: flex;
+            align-items: center;
+            border-bottom: 1px dashed #ccc;
+            padding-bottom: 10px;
+            margin-bottom: 10px;
+        }
+
+        .scrap-avatar {
+            width: 40px;
+            height: 40px;
+            background-color: var(--primary-purple);
+            border-radius: 5px;
+            margin-right: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 20px;
+        }
+
+        .scrap-info p {
+            margin: 0;
+            font-size: 13px;
+        }
+
+        .scrap-info .date {
+            font-size: 11px;
+            color: #888;
+        }
+
+        .scrap-body {
+            font-size: 13px;
+            line-height: 1.6;
+            color: #444;
+        }
+
+        /* Destaque para o recado final */
+        .special-scrap {
+            background-color: var(--bg-color);
+            border: 2px solid var(--primary-purple);
+        }
+
+        .btn-special {
+            background-color: var(--primary-purple);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-family: 'Tahoma', sans-serif;
+            margin-top: 15px;
+            transition: 0.3s;
+        }
+
+        .btn-special:hover {
+            background-color: var(--dark-purple);
+            transform: scale(1.05);
+        }
+
+        #hidden-message {
+            display: none;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px dashed var(--primary-purple);
+        }
 
         @media (max-width: 600px) {
             .sidebar { border-right: none; border-bottom: 3px dotted var(--light-purple); }
+            .profile-section { flex-direction: column; align-items: center; text-align: center; }
+            .profile-info { margin-left: 0; margin-top: 10px; }
         }
     </style>
 </head>
 <body>
 
-    <!-- Texto Marquee dos anos 2010 -->
     <div class="marquee-container">
-        <marquee scrollamount="5">✿ Bem-vindos ao Blog da Bruna! ✿ Onde a magia dos 30 anos acontece! ✿ ~*~ Ouvindo Restart no último volume ~*~ ✿</marquee>
+        <marquee scrollamount="5">✿ Bem-vindos ao Blog da Bruna! ✿ Deixem seus recadinhos no meu mural! ✿ ~*~ Ouvindo Restart no último volume ~*~ ✿</marquee>
     </div>
 
-    <!-- Estrutura Principal do Blog -->
     <div id="blog-container">
         
-        <!-- Cabeçalho -->
+        <!-- ================= CAPA E PERFIL ================= -->
         <header class="blog-header">
-            <h1>De Repente 30 da Bruna</h1>
-            <p>Criado em: 30/09/1996 | Views: 9.999</p>
+            <div class="cover-photo">
+                <!-- BINHO: Cole aqui o link da imagem da capa (Pode ser uma arte do Justin Bieber com Kuromi) -->
+                <img src="https://i.pinimg.com/736x/8f/c9/7e/8fc97ed0753a99252c7921a4be48e029.jpg" alt="Capa Justin Bieber e Kuromi">
+            </div>
+            
+            <div class="profile-section">
+                <div class="perfil-img">
+                    <!-- BINHO: Cole aqui o link da foto de perfil da Bruna -->
+                    <img src="https://i.pinimg.com/474x/a5/d8/4a/a5d84a7e934a36cd2bf3ff80e9df1bc1.jpg" alt="Foto da Bruna">
+                </div>
+                <div class="profile-info">
+                    <h1>De Repente 30 da Bruna</h1>
+                    <p style="margin: 0; font-weight: bold; color: var(--dark-purple);">Bem-vindos ao meu mundinho 💜</p>
+                </div>
+            </div>
         </header>
 
-        <!-- Sidebar -->
+        <!-- ================= SIDEBAR ================= -->
         <aside class="sidebar">
             
-            <!-- PINCEL MÁGICO (Paleta de Cores) -->
+            <!-- PINCEL MÁGICO -->
             <div class="widget">
                 <h3>~*~ Personalizar ~*~</h3>
                 <label for="color-picker" style="cursor: pointer; display: flex; align-items: center; gap: 10px; font-weight: bold; color: var(--primary-purple);">
                     <img src="https://img.icons8.com/color/48/paint-brush.png" alt="Pincel" style="width: 24px; height: 24px;"> Mudar Cor do Blog
                 </label>
-                <!-- Este input invisível abre a paleta de cores do sistema! -->
                 <input type="color" id="color-picker" value="#8e44ad" style="opacity: 0; width: 0; height: 0;">
                 <p style="font-size: 10px; margin-top: 5px; color: #777;">Clique no pincel para pintar o site!</p>
             </div>
 
-            <!-- Perfil -->
+            <!-- Perfil Sobre Mim -->
             <div class="widget">
-                <h3>~*~ Perfil ~*~</h3>
-                <div class="perfil-img">
-                    <img src="https://img.icons8.com/color/96/magic-star.png" alt="Estrela Mágica">
+                <h3>~*~ Sobre Mim ~*~</h3>
+                <p style="font-size: 12px; line-height: 1.5;"><strong>Nome:</strong> Bruna Coi Santos<br>
+                <strong>Idade:</strong> 30 aninhos<br>
+                <strong>Vibe:</strong> Amo música, cantar, tocar e cantar kkkk, amooo frio, para mim faria frio sempre, poder usar minhas roupas confortáveis que tanto gosto, adoro ler, e se tem um lugar que não saio de casa é a cozinha, você sempre vai me ver cozinhando algo bem gostoso e saudável (com bastante tempero) e minhas paixões são o divo Justin Bieber e a deusa Kuromi!!!</p>
+                
+                <div class="badges">
+                    <span class="badge">100% Leitora</span>
+                    <span class="badge">100% Justin</span>
+                    <span class="badge">Amo Frio ❄️</span>
+                    <span class="badge">Kuromi 🖤</span>
                 </div>
-                <p><strong>Nome:</strong> Bruna Coi Santos</p>
-                <p><strong>Idade:</strong> 30 aninhos</p>
-                <p><strong>Vibe:</strong> Amo música, cantar, tocar e cantar kkkk, amooo frio, para mim faria frio sempre, poder usar minhas roupas confortáveis que tanto gosto, adoro ler, e se tem um lugar que não saio de casa é a cozinha, você sempre vai me ver cozinhando algo bem gostoso e saudável (com bastante tempero) e minhas paixões são o divo Justin Bieber e a deusa Kuromi!!!</p>
             </div>
 
-            <!-- Player do Restart (Atualizado com bypass de anúncios) -->
-            <div class="widget">
-                <h3>MP3 Player - Restart</h3>
+            <!-- Player do Restart (Kuromi Style) -->
+            <div class="widget" style="background-color: var(--bg-color);">
                 <div class="playlist-menu">
-                    <!-- Botões de Play -->
                     <button class="song-btn" onclick="tocarRestart('-7QVg1fIAt8', this)">▶ Lembranças</button>
                     <button class="song-btn" onclick="tocarRestart('di9ef5qLTMo', this)">▶ Final Feliz</button>
                     <button class="song-btn" onclick="tocarRestart('wPxnspl4t2c', this)">▶ Amanhecer no Teu Olhar</button>
                 </div>
-                <!-- Mini tela do vídeo -->
-                <div id="player-youtube">
-                    <p style="font-size: 11px; text-align: center; color: #777; margin-top: 10px;">(Clique em uma música para dar o Play)</p>
+                
+                <div class="kuromi-frame">
+                    <div id="player-youtube">
+                        <p style="font-size: 11px; text-align: center; color: #999; margin: 20px;">(Clique em uma música para dar o Play)</p>
+                    </div>
                 </div>
+            </div>
+            
+            <!-- Contador de Visitas Falso -->
+            <div style="text-align: center; margin-top: 20px;">
+                <p style="font-size: 10px; margin-bottom: 2px;">Você é o visitante nº:</p>
+                <img src="https://counter10.optie.it/private/freecounterstat.php?c=8h4b5x4l3x4j3w4y7q3r4a5k7n3x5p7w" alt="Contador" style="border:0; width: 100px;">
             </div>
         </aside>
 
-        <!-- Posts (Botões das Surpresas com Ícones Fofos) -->
+        <!-- ================= ÁREA PRINCIPAL (FOTOS E MURAL) ================= -->
         <main class="main-content">
-            <div class="blog-post-btn" onclick="abrirJanela('janela-fotos')">
-                <img src="https://img.icons8.com/color/96/camera--v1.png" alt="Câmera">
-                Álbum de Fotos
-            </div>
             
-            <div class="blog-post-btn" onclick="abrirJanela('janela-musica')">
-                <img src="https://img.icons8.com/color/96/microphone.png" alt="Microfone">
-                Talento Musical
+            <h2 class="section-title">Meus Álbuns</h2>
+            <div class="albums-section">
+                <!-- BINHO: Cole o link do Google Photos Parte 1 dentro do href="" abaixo -->
+                <a href="#" target="_blank" class="album-btn">
+                    <img src="https://img.icons8.com/color/96/stack-of-photos.png" alt="Fotos">
+                    <br>Fotos Minhas<br>(Parte 1)
+                </a>
+
+                <!-- BINHO: Cole o link do Google Photos Parte 2 dentro do href="" abaixo -->
+                <a href="#" target="_blank" class="album-btn">
+                    <img src="https://img.icons8.com/color/96/stack-of-photos.png" alt="Fotos">
+                    <br>Fotos Minhas<br>(Parte 2)
+                </a>
             </div>
 
-            <div class="blog-post-btn" onclick="abrirJanela('janela-cardapio')">
-                <img src="https://img.icons8.com/color/96/banana.png" alt="Comida">
-                O Cardápio
+            <h2 class="section-title">Mural de Recados (Scraps)</h2>
+
+            <!-- SCRAP 1 -->
+            <div class="scrap">
+                <div class="scrap-header">
+                    <div class="scrap-avatar">B</div>
+                    <div class="scrap-info">
+                        <p><strong>De:</strong> Binho (Namorado mais babão)</p>
+                        <p class="date">Enviado hoje às 10:05</p>
+                    </div>
+                </div>
+                <div class="scrap-body">
+                    <strong>🎵 Vocação Musical</strong><br>
+                    Eu sei que você tem um dom incrível para a música! Seja soltando a voz, dedilhando o violão ou arrasando no teclado, o mundo fica muito mais bonito quando você coloca essa vocação para fora. Com ídolos como Justin Bieber e Restart como inspiração. As músicas nostálgicas que você canta tão bem! Eu só quero te pedir uma coisa: nunca pare de cantar e tocar. Continue fazendo muito isso que você tanto gosta, pois o seu talento ilumina qualquer lugar!
+                </div>
+            </div>
+
+            <!-- SCRAP 2 -->
+            <div class="scrap">
+                <div class="scrap-header">
+                    <div class="scrap-avatar">B</div>
+                    <div class="scrap-info">
+                        <p><strong>De:</strong> Binho</p>
+                        <p class="date">Enviado hoje às 10:10</p>
+                    </div>
+                </div>
+                <div class="scrap-body">
+                    <strong>🍱 MasterChef</strong><br>
+                    Como não se lembrar do seu bolo de banana com aveia tão gostoso que só você sabe fazer? E tantas receitas que você inventa "no olho" kkkk. Só te peço uma coisa: jamais se esqueça de colocar BASTANTE tempero nas suas comidinhas, exatamente do jeitinho que você tanto ama!
+                </div>
+            </div>
+
+            <!-- SCRAP 3 -->
+            <div class="scrap">
+                <div class="scrap-header">
+                    <div class="scrap-avatar">B</div>
+                    <div class="scrap-info">
+                        <p><strong>De:</strong> Binho</p>
+                        <p class="date">Enviado hoje às 10:15</p>
+                    </div>
+                </div>
+                <div class="scrap-body">
+                    <strong>🫐 A Mais Saudável</strong><br>
+                    Já bebeu água hoje? Como você sabe muito bem, hidratação e alimentação saudável são essenciais! O seu menu perfeito sempre vai ter espaço para suas comidinhas, seja a boa abóbora (seja a Menina ou a Cabotia). E de sobremesa? Um prato lindo de Melão, Caqui Fuyu, Blueberry e Cereja Chilena. Um brinde com muita água para sua saúde!!
+                </div>
+            </div>
+
+            <!-- SCRAP 4 -->
+            <div class="scrap">
+                <div class="scrap-header">
+                    <div class="scrap-avatar">B</div>
+                    <div class="scrap-info">
+                        <p><strong>De:</strong> Binho</p>
+                        <p class="date">Enviado hoje às 10:22</p>
+                    </div>
+                </div>
+                <div class="scrap-body">
+                    <strong>❄️ O Clima Perfeito</strong><br>
+                    Se dependesse de você, hoje faria aquele frio maravilhoso, bem longe do calor que você detesta! O seu dia perfeito pede roupas bem confortáveis (para se sentir super bem) e aproveitar o seu momento de paz!
+                </div>
+            </div>
+
+            <!-- SCRAP 5 -->
+            <div class="scrap">
+                <div class="scrap-header">
+                    <div class="scrap-avatar">B</div>
+                    <div class="scrap-info">
+                        <p><strong>De:</strong> Binho</p>
+                        <p class="date">Enviado hoje às 10:30</p>
+                    </div>
+                </div>
+                <div class="scrap-body">
+                    <strong>📖 A Grã-Senhora</strong><br>
+                    Você já leu tantas histórias épicas e fantásticas, mas pra mim, a história mais incrível de todas é a sua. Feliz aniversário para a verdadeira Grã-Senhora dessa corte! Que a Sarah J. Maas tenha inveja da jornada maravilhosa que são os seus 30 anos.
+                </div>
+            </div>
+
+            <!-- SCRAP 6 -->
+            <div class="scrap">
+                <div class="scrap-header">
+                    <div class="scrap-avatar">B</div>
+                    <div class="scrap-info">
+                        <p><strong>De:</strong> Binho</p>
+                        <p class="date">Enviado hoje às 10:35</p>
+                    </div>
+                </div>
+                <div class="scrap-body">
+                    <strong>🍿 Pipoca na Mão</strong><br>
+                    Hoje o dia é todo seu! Merece voar pelos céus com o Banguela, desbravar os mares com a Moana e dar muitas risadas com o Mike Wazowski, e não podemos esquecer do Shrek. Afinal, a magia da Disney e do Mickey combinam perfeitamente com a alegria que você espalha por aí!
+                </div>
             </div>
             
-            <div class="blog-post-btn" onclick="abrirJanela('janela-saude')">
-                <img src="https://img.icons8.com/color/96/watermelon.png" alt="Frutas">
-                Vida Saudável
+            <!-- SCRAP 7 -->
+            <div class="scrap">
+                <div class="scrap-header">
+                    <div class="scrap-avatar">B</div>
+                    <div class="scrap-info">
+                        <p><strong>De:</strong> Binho</p>
+                        <p class="date">Enviado hoje às 10:45</p>
+                    </div>
+                </div>
+                <div class="scrap-body">
+                    <strong>🎨 Kit Sobrevivência</strong><br>
+                    Espero que essa sua nova fase seja tão colorida quanto os seus desenhos! Que nunca falte tempo para você pintar, desenhar e comprar mais as coisas de papelaria que você adora.
+                </div>
             </div>
-            
-            <div class="blog-post-btn" onclick="abrirJanela('janela-clima')">
-                <img src="https://img.icons8.com/color/96/winter.png" alt="Frio">
-                A Vibe Perfeita
+
+            <!-- SCRAP 8 (O MENSAGEM FINAL COM SURPRESA) -->
+            <div class="scrap special-scrap">
+                <div class="scrap-header" style="border-bottom-color: var(--primary-purple);">
+                    <div class="scrap-avatar" style="background-color: var(--dark-purple);">B</div>
+                    <div class="scrap-info">
+                        <p><strong>De:</strong> Binho</p>
+                        <p class="date">Enviado hoje às 00:00 - ♥ TOP DEPOIMENTO ♥</p>
+                    </div>
+                </div>
+                <div class="scrap-body" style="text-align: center;">
+                    <p style="font-size: 16px; font-weight: bold; color: var(--primary-purple);">Tem um depoimento super especial aqui para você...</p>
+                    <button class="btn-special" onclick="revelarMensagem()">Ler Depoimento Especial 🎁</button>
+                    
+                    <div id="hidden-message">
+                        <p style="font-size: 15px;">Amor, quero te desejar o melhor aniversário do mundo. Trinta anos é algo lindo! Que essa nova fase seja incrível, cheia de paz, saúde, conquistas, mimos da Kuromi e as melhores músicas tocando de fundo sempre alegrando seus dias. Você é uma pessoa muito especial para mim. E quero sempre o melhor para você. Aproveite o seu dia e sua vida ao máximo, você merece o universo todinho meu amor. :3</p>
+                        <p style="font-family: 'Pacifico', cursive; color: var(--primary-purple); font-size: 1.8rem; margin-top: 15px;">Com carinho, Binho</p>
+                    </div>
+                </div>
             </div>
-            
-            <div class="blog-post-btn" onclick="abrirJanela('janela-livros')">
-                <img src="https://img.icons8.com/color/96/book.png" alt="Livros">
-                Vida Literária
-            </div>
-            
-            <div class="blog-post-btn" onclick="abrirJanela('janela-pipoca')">
-                <img src="https://img.icons8.com/color/96/popcorn.png" alt="Pipoca">
-                Sessão Pipoca
-            </div>
-            
-            <div class="blog-post-btn" onclick="abrirJanela('janela-kit')">
-                <img src="https://img.icons8.com/color/96/paint-palette.png" alt="Artes">
-                Kit Desenho
-            </div>
-            
-            <div class="blog-post-btn highlight-post" onclick="abrirJanela('janela-mensagem')">
-                <img src="https://img.icons8.com/color/96/gift--v1.png" alt="Presente">
-                Mensagem Especial
-            </div>
+
         </main>
     </div>
 
-    <!-- ================= MODAIS (JANELAS POP-UP VINTAGE) ================= -->
-
-    <!-- ÁLBUM DE FOTOS -->
-    <div id="janela-fotos" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <span>C:\Meus_Documentos\Fotos_Bruna.exe</span>
-                <button class="close-btn" onclick="fecharJanela('janela-fotos')">X</button>
-            </div>
-            <div class="modal-body" style="max-height: 70vh; overflow-y: auto;">
-                <p>Nossas lembranças registradas na câmera digital! 📸</p>
-                
-                <div class="photo-section">
-                    <strong>Fotos da Bruna</strong>
-                    <div class="photo-grid">
-                        <div class="polaroid">
-                            <img src="" alt="Foto Bruna 1">
-                            A mais linda
-                        </div>
-                        <div class="polaroid">
-                            <img src="" alt="Foto Bruna 2">
-                            Maravilhosa
-                        </div>
-                    </div>
-                </div>
-
-                <div class="photo-section">
-                    <strong>Fotos Nossas</strong>
-                    <div class="photo-grid" id="grid-fotos-nossas">
-                        <div class="polaroid">
-                            <img src="" alt="Foto Nossa">
-                            Nós 💜
-                        </div>
-                        
-                        <label class="upload-btn">
-                            📷 Tirar Foto Agora
-                            <input type="file" accept="image/*" capture="environment" id="camera-input">
-                        </label>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- MÚSICA E VOCAÇÃO -->
-    <div id="janela-musica" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <span>Vocacao_Musical.txt</span>
-                <button class="close-btn" onclick="fecharJanela('janela-musica')">X</button>
-            </div>
-            <div class="modal-body">
-                <p>Eu sei que você tem um dom incrível para a música! Seja soltando a voz, dedilhando o violão ou arrasando no teclado, o mundo fica muito mais bonito quando você coloca essa vocação para fora. Com ídolos como Justin Bieber e Restart como inspiração. As músicas nostálgicas que você canta tão bem! Eu só quero te pedir uma coisa: nunca pare de cantar e tocar. Continue fazendo muito isso que você tanto gosta, pois o seu talento ilumina qualquer lugar!</p>
-            </div>
-        </div>
-    </div>
-
-    <!-- CARDÁPIO -->
-    <div id="janela-cardapio" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <span>Aviso_Importante.txt</span>
-                <button class="close-btn" onclick="fecharJanela('janela-cardapio')">X</button>
-            </div>
-            <div class="modal-body">
-                <p>Como não se lembrar do seu bolo de banana com aveia tão gostoso que só você sabe fazer? E tantas receitas que você inventa "no olho" kkkk. Só te peço uma coisa: jamais se esqueça de colocar BASTANTE tempero nas suas comidinhas, exatamente do jeitinho que você tanto ama!</p>
-            </div>
-        </div>
-    </div>
-
-    <!-- SAÚDE -->
-    <div id="janela-saude" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <span>Dica_de_Saude.txt</span>
-                <button class="close-btn" onclick="fecharJanela('janela-saude')">X</button>
-            </div>
-            <div class="modal-body">
-                <p>Já bebeu água hoje? Como você sabe muito bem, hidratação e alimentação saudável são essenciais! O seu menu perfeito sempre vai ter espaço para suas comidinhas, seja a boa abóbora (seja a Menina ou a Cabotia). E de sobremesa? Um prato lindo de Melão, Caqui Fuyu, Blueberry e Cereja Chilena. Um brinde com muita água para sua saúde!!</p>
-            </div>
-        </div>
-    </div>
-
-    <!-- CLIMA E VIBE -->
-    <div id="janela-clima" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <span>Previsao_Tempo.txt</span>
-                <button class="close-btn" onclick="fecharJanela('janela-clima')">X</button>
-            </div>
-            <div class="modal-body">
-                <p>Se dependesse de você, hoje faria aquele frio maravilhoso, bem longe do calor que você detesta! O seu dia perfeito pede roupas bem confortáveis (para se sentir super bem) e aproveitar o seu momento de paz!</p>
-            </div>
-        </div>
-    </div>
-
-    <!-- LITERATURA -->
-    <div id="janela-livros" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <span>ACOTAR_Fans.txt</span>
-                <button class="close-btn" onclick="fecharJanela('janela-livros')">X</button>
-            </div>
-            <div class="modal-body">
-                <p>Você já leu tantas histórias épicas e fantásticas, mas pra mim, a história mais incrível de todas é a sua. Feliz aniversário para a verdadeira Grã-Senhora dessa corte! Que a Sarah J. Maas tenha inveja da jornada maravilhosa que são os seus 30 anos.</p>
-            </div>
-        </div>
-    </div>
-
-    <!-- PIPOCA -->
-    <div id="janela-pipoca" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <span>Sessao_Disney.txt</span>
-                <button class="close-btn" onclick="fecharJanela('janela-pipoca')">X</button>
-            </div>
-            <div class="modal-body">
-                <p>Hoje o dia é todo seu! Merece voar pelos céus com o Banguela, desbravar os mares com a Moana e dar muitas risadas com o Mike Wazowski, e não podemos esquecer do Shrek. Afinal, a magia da Disney e do Mickey combinam perfeitamente com a alegria que você espalha por aí!</p>
-            </div>
-        </div>
-    </div>
-
-    <!-- KIT -->
-    <div id="janela-kit" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <span>Papelaria.txt</span>
-                <button class="close-btn" onclick="fecharJanela('janela-kit')">X</button>
-            </div>
-            <div class="modal-body">
-                <p>Espero que essa sua nova fase seja tão colorida quanto os seus desenhos! Que nunca falte tempo para você pintar, desenhar e comprar mais as coisas de papelaria que você adora.</p>
-            </div>
-        </div>
-    </div>
-
-    <!-- MENSAGEM FINAL (Confetes) -->
-    <div id="janela-mensagem" class="modal">
-        <div class="modal-content">
-            <div class="modal-header" style="background-color: var(--dark-purple);">
-                <span>♥_Feliz_Aniversario_♥.exe</span>
-                <button class="close-btn" onclick="fecharJanela('janela-mensagem')">X</button>
-            </div>
-            <div class="modal-body">
-                <p>Amor, quero te desejar o melhor aniversário do mundo. Trinta anos é algo lindo! Que essa nova fase seja incrível, cheia de paz, saúde, conquistas, mimos da Kuromi e as melhores músicas tocando de fundo sempre alegrando seus dias. Você é uma pessoa muito especial para mim. E quero sempre o melhor para você. Aproveite o seu dia e sua vida ao máximo, você merece o universo todinho meu amor. :3</p>
-                <p style="font-family: 'Pacifico', cursive; color: var(--primary-purple); margin-top: 20px; font-size: 1.5rem;">Com carinho, Binho</p>
-            </div>
-        </div>
-    </div>
-
-    <!-- SCRIPTS MÁGICOS -->
+    <!-- SCRIPTS -->
     <script>
-        // 1. SISTEMA DE TROCAR A COR DO SITE INTEIRO (PINCEL MÁGICO)
+        // 1. PINCEL MÁGICO
         const colorPicker = document.getElementById('color-picker');
         colorPicker.addEventListener('input', function(e) {
             document.documentElement.style.setProperty('--base-color', e.target.value);
         });
 
-        // 2. PLAYER DO YOUTUBE (TENTATIVA DE BLOQUEIO DE ANÚNCIO VIA NO-COOKIE)
+        // 2. PLAYER DO YOUTUBE
         function tocarRestart(videoId, btn) {
             document.querySelectorAll('.song-btn').forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
 
-            // TRUQUE PARA BURLAR ANÚNCIOS:
-            // Troquei o youtube.com por youtube-nocookie.com (Domínio sem rastreamento de anúncios).
-            // E adicionei rel=0 (Não mostra vídeos recomendados de canais aleatórios) e iv_load_policy=3 (Esconde anotações/cards de anúncios).
             const player = document.getElementById('player-youtube');
-            player.innerHTML = `<iframe width="100%" height="80" src="https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&rel=0&iv_load_policy=3" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
+            // O estilo CSS (aspect-ratio 16/9) no contêiner do player cuida de não cortar a tela
+            player.innerHTML = `<iframe src="https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&rel=0&iv_load_policy=3" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
         }
 
-        // 3. CAIXAS POP-UP
-        function abrirJanela(id) {
-            document.getElementById(id).style.display = 'flex';
-            if(id === 'janela-mensagem') {
+        // 3. REVELAR DEPOIMENTO E CHUVA DE CONFETES
+        function revelarMensagem() {
+            const mensagem = document.getElementById('hidden-message');
+            if(mensagem.style.display === 'none' || mensagem.style.display === '') {
+                mensagem.style.display = 'block';
                 dispararConfetes();
             }
         }
 
-        function fecharJanela(id) {
-            document.getElementById(id).style.display = 'none';
-        }
-
-        window.onclick = function(event) {
-            if (event.target.classList.contains('modal')) {
-                event.target.style.display = 'none';
-            }
-        }
-
-        // 4. CÂMERA FOTOGRÁFICA
-        const cameraInput = document.getElementById('camera-input');
-        const gridNossasFotos = document.getElementById('grid-fotos-nossas');
-
-        window.onload = function() {
-            const fotoSalva = localStorage.getItem('foto_bruna_nova');
-            if (fotoSalva) { renderizarFoto(fotoSalva); }
-        }
-
-        cameraInput.addEventListener('change', function(e) {
-            const file = e.target.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = function(event) {
-                    const base64DaFoto = event.target.result;
-                    localStorage.setItem('foto_bruna_nova', base64DaFoto);
-                    renderizarFoto(base64DaFoto);
-                };
-                reader.readAsDataURL(file);
-            }
-        });
-
-        function renderizarFoto(base64DaFoto) {
-            let fotoExistente = document.getElementById('foto-inserida-pelo-usuario');
-            if (!fotoExistente) {
-                const polaroidDiv = document.createElement('div');
-                polaroidDiv.className = 'polaroid';
-                polaroidDiv.id = 'foto-inserida-pelo-usuario';
-                
-                const img = document.createElement('img');
-                img.src = base64DaFoto;
-                
-                const legenda = document.createElement('div');
-                legenda.innerText = 'Hoje 💜';
-
-                polaroidDiv.appendChild(img);
-                polaroidDiv.appendChild(legenda);
-                gridNossasFotos.insertBefore(polaroidDiv, cameraInput.parentElement);
-            } else {
-                fotoExistente.querySelector('img').src = base64DaFoto;
-            }
-        }
-
-        // 5. CONFETES
         function dispararConfetes() {
-            var duration = 3000;
+            var duration = 4000; // 4 segundos de confetes para emocionar!
             var end = Date.now() + duration;
 
             (function frame() {
