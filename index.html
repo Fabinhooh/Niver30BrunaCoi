@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blog da Bruna - De Repente 30</title>
+    <title>Blog da Bruuh ;333 - De Repente 30</title>
     
     <!-- Biblioteca de Confetes -->
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
@@ -79,7 +79,7 @@
         .cover-photo {
             width: 100%;
             height: 250px;
-            background-color: #2c003e; /* Cor de fundo caso a imagem demore a carregar */
+            background-color: #2c003e;
             overflow: hidden;
         }
 
@@ -93,7 +93,7 @@
             display: flex;
             align-items: flex-end;
             padding: 0 30px;
-            margin-top: -60px; /* Faz a foto subir na capa */
+            margin-top: -60px;
             position: relative;
             z-index: 2;
         }
@@ -102,7 +102,7 @@
             width: 140px;
             height: 140px;
             background-color: var(--light-purple);
-            border-radius: 5px; /* Estilo Polaroid/Orkut quadrado */
+            border-radius: 5px;
             border: 5px solid white;
             box-shadow: 0 4px 8px rgba(0,0,0,0.3);
             overflow: hidden;
@@ -126,6 +126,26 @@
             font-size: 2.5rem;
             margin: 0;
             line-height: 1;
+        }
+
+        /* STATUS MSN */
+        .msn-status {
+            display: flex;
+            align-items: center;
+            font-size: 13px;
+            color: #555;
+            margin-top: 5px;
+            font-weight: bold;
+        }
+
+        .msn-dot {
+            width: 10px;
+            height: 10px;
+            background-color: #4CAF50;
+            border-radius: 50%;
+            display: inline-block;
+            margin-right: 5px;
+            box-shadow: 0 0 5px #4CAF50;
         }
 
         /* ================= SIDEBAR ================= */
@@ -154,15 +174,59 @@
             font-family: 'Comic Sans MS', cursive, sans-serif;
         }
 
-        /* Player Kuromi */
+        /* Selos de Fã / Badges */
+        .badges {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+            justify-content: center;
+        }
+        .badge {
+            background-color: var(--light-purple);
+            color: #fff;
+            padding: 3px 8px;
+            border-radius: 15px;
+            font-size: 10px;
+            font-weight: bold;
+            border: 1px solid var(--dark-purple);
+        }
+
+        /* COMUNIDADES (Orkut Style) */
+        .comunidades-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .comunidade {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            font-size: 10px;
+            color: var(--dark-purple);
+            font-weight: bold;
+        }
+
+        .comunidade img {
+            width: 50px;
+            height: 50px;
+            border: 1px solid var(--light-purple);
+            border-radius: 5px;
+            margin-bottom: 3px;
+        }
+
+        /* PLAYER KUROMI E GERENCIADOR DE PLAYLIST */
         .kuromi-frame {
             border: 4px solid #1a1a1a;
             border-radius: 12px;
             padding: 10px;
-            background-color: #2c003e; /* Roxo bem escuro/gótico */
+            background-color: #2c003e;
             box-shadow: 0 0 12px var(--primary-purple);
             position: relative;
             text-align: center;
+            margin-top: 10px;
         }
 
         .kuromi-frame::before {
@@ -173,12 +237,11 @@
             font-weight: bold;
             margin-bottom: 10px;
             font-family: 'Comic Sans MS', cursive;
-            letter-spacing: 1px;
         }
 
         #player-youtube {
             width: 100%;
-            aspect-ratio: 16 / 9; /* Mantém a proporção do vídeo sem cortar! */
+            aspect-ratio: 16 / 9;
             background-color: #000;
             border-radius: 5px;
             overflow: hidden;
@@ -196,7 +259,16 @@
             display: flex;
             flex-direction: column;
             gap: 5px;
-            margin-bottom: 10px;
+            margin-bottom: 15px;
+            max-height: 180px;
+            overflow-y: auto;
+            padding-right: 5px;
+        }
+
+        .song-item {
+            display: flex;
+            gap: 5px;
+            align-items: center;
         }
 
         .song-btn {
@@ -208,6 +280,10 @@
             font-size: 11px;
             text-align: left;
             border-radius: 3px;
+            flex-grow: 1;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
 
         .song-btn.active, .song-btn:hover {
@@ -215,22 +291,45 @@
             color: white;
         }
 
-        /* Selos de Fã / Badges */
-        .badges {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 5px;
-            justify-content: center;
-        }
-        .badge {
-            background-color: var(--light-purple);
-            color: #fff;
-            padding: 3px 8px;
-            border-radius: 15px;
+        .edit-controls button {
+            background: none;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            cursor: pointer;
             font-size: 10px;
-            font-weight: bold;
-            border: 1px solid var(--dark-purple);
+            padding: 4px 6px;
+            color: #555;
+            background-color: #eee;
         }
+        .edit-controls button:hover { background-color: #ddd; }
+
+        .add-song-area {
+            border-top: 1px dashed var(--primary-purple);
+            padding-top: 10px;
+            margin-top: 10px;
+        }
+        
+        .add-song-area input {
+            width: 90%;
+            padding: 5px;
+            margin-bottom: 5px;
+            font-size: 11px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+        
+        .add-song-area button {
+            width: 100%;
+            padding: 6px;
+            background-color: var(--primary-purple);
+            color: white;
+            border: none;
+            border-radius: 3px;
+            font-weight: bold;
+            font-size: 11px;
+        }
+        .add-song-area button:hover { background-color: var(--dark-purple); }
+
 
         /* ================= ÁREA DE CONTEÚDO (MURAL E FOTOS) ================= */
         .main-content {
@@ -363,13 +462,14 @@
             .sidebar { border-right: none; border-bottom: 3px dotted var(--light-purple); }
             .profile-section { flex-direction: column; align-items: center; text-align: center; }
             .profile-info { margin-left: 0; margin-top: 10px; }
+            .comunidades-grid { grid-template-columns: repeat(2, 1fr); }
         }
     </style>
 </head>
 <body>
 
     <div class="marquee-container">
-        <marquee scrollamount="5">✿ Bem-vindos ao Blog da Bruna! ✿ Deixem seus recadinhos no meu mural! ✿ ~*~ Ouvindo Restart e Justin Bieber no último volume ~*~ ✿</marquee>
+        <marquee scrollamount="5">✿ Bem-vindos ao Blog da Bruuh ;333 ✿ Deixem seus recadinhos no meu mural! ✿ ~*~ Ouvindo Restart e Justin Bieber no último volume ~*~ ✿</marquee>
     </div>
 
     <div id="blog-container">
@@ -377,41 +477,32 @@
         <!-- ================= CAPA E PERFIL ================= -->
         <header class="blog-header">
             <div class="cover-photo">
-                <!-- BINHO: Cole aqui o link da imagem da capa (Pode ser uma arte do Justin Bieber com Kuromi) -->
                 <img src="https://i.postimg.cc/Qx9FShBd/20260929-164946.jpg" alt="Capa Justin Bieber e Kuromi">
             </div>
             
             <div class="profile-section">
                 <div class="perfil-img">
-                    <!-- BINHO: Cole aqui o link da foto de perfil da Bruna -->
                     <img src="https://i.postimg.cc/ZKBWj49R/20260929-174635.jpg" alt="Foto da Bruna">
                 </div>
                 <div class="profile-info">
-                    <h1>De Repente 30 da Bruna</h1>
-                    <p style="margin: 0; font-weight: bold; color: var(--dark-purple);">Bem-vindos ao meu mundinho 💜</p>
+                    <h1>De Repente 30 da Bruuh</h1>
+                    <!-- STATUS MSN -->
+                    <div class="msn-status">
+                        <span class="msn-dot"></span>(Status: Online) - Trintando com muito estilo e ouvindo as melhores! 🎵
+                    </div>
                 </div>
             </div>
         </header>
 
         <!-- ================= SIDEBAR ================= -->
         <aside class="sidebar">
-            
-            <!-- PINCEL MÁGICO -->
-            <div class="widget">
-                <h3>~*~ Personalizar ~*~</h3>
-                <label for="color-picker" style="cursor: pointer; display: flex; align-items: center; gap: 10px; font-weight: bold; color: var(--primary-purple);">
-                    <img src="https://img.icons8.com/color/48/paint-brush.png" alt="Pincel" style="width: 24px; height: 24px;"> Mudar Cor do Blog
-                </label>
-                <input type="color" id="color-picker" value="#8e44ad" style="opacity: 0; width: 0; height: 0;">
-                <p style="font-size: 10px; margin-top: 5px; color: #777;">Clique no pincel para pintar o site!</p>
-            </div>
 
             <!-- Perfil Sobre Mim -->
             <div class="widget">
                 <h3>~*~ Sobre Mim ~*~</h3>
                 <p style="font-size: 12px; line-height: 1.5;"><strong>Nome:</strong> Bruna Coi Santos<br>
                 <strong>Idade:</strong> 30 aninhos<br>
-                <strong>Vibe:</strong> Amo música, cantar, tocar e cantar kkkk, amooo frio, para mim faria frio sempre, poder usar minhas roupas confortáveis que tanto gosto, adoro ler, e se tem um lugar que não saio de casa é a cozinha, você sempre vai me ver cozinhando algo bem gostoso e saudável (com bastante tempero) e minhas paixões são o divo Justin Bieber e a deusa Kuromi!!!</p>
+                <strong>Vibe:</strong> Amo música, cantar, tocar e cantar kkkk, amooo frio, para mim faria frio sempre, poder usar minhas roupas confortáveis que tanto gosto, adoro ler, amo sair para caminhar, conhecer novos lugares, fazer coisas divertidas e legais e também descansar. E se tem um lugar que não saio de casa é a cozinha, você sempre vai me ver cozinhando algo bem gostoso e saudável (com bastante tempero) e minhas paixões são o divo Justin Bieber e a deusa Kuromi!!!</p>
                 
                 <div class="badges">
                     <span class="badge">100% Leitora</span>
@@ -421,14 +512,20 @@
                 </div>
             </div>
 
-            <!-- Player do Restart (Kuromi Style) -->
+            <!-- GERENCIADOR DE MÚSICAS -->
             <div class="widget" style="background-color: var(--bg-color);">
-                <div class="playlist-menu">
-                    <button class="song-btn" onclick="tocarRestart('-7QVg1fIAt8', this)">▶ Lembranças</button>
-                    <button class="song-btn" onclick="tocarRestart('di9ef5qLTMo', this)">▶ Final Feliz</button>
-                    <button class="song-btn" onclick="tocarRestart('wPxnspl4t2c', this)">▶ Amanhecer no Teu Olhar</button>
-                </div>
+                <h3>~*~ Minhas Músicas ~*~</h3>
                 
+                <!-- A lista de músicas vai aparecer aqui gerada pelo JavaScript -->
+                <div id="playlist-container" class="playlist-menu"></div>
+                
+                <!-- Formulário para adicionar nova música -->
+                <div class="add-song-area">
+                    <input type="text" id="new-song-name" placeholder="Nome da Música (Ex: As I Am)">
+                    <input type="text" id="new-song-url" placeholder="Link do YouTube (Obrigatório)">
+                    <button onclick="adicionarMusica()">+ Adicionar Música</button>
+                </div>
+
                 <div class="kuromi-frame">
                     <div id="player-youtube">
                         <p style="font-size: 11px; text-align: center; color: #999; margin: 20px;">(Clique em uma música para dar o Play)</p>
@@ -439,7 +536,7 @@
             <!-- Contador de Visitas Falso -->
             <div style="text-align: center; margin-top: 20px;">
                 <p style="font-size: 10px; margin-bottom: 2px;">Você é o visitante nº:</p>
-                <img src="https://i.postimg.cc/mt4ZgxNH/file-00000000312c820eb6ecd767a7838510.png" alt="Visitantes"></a><br><br>
+                <img src="https://i.postimg.cc/mt4ZgxNH/file-00000000312c820eb6ecd767a7838510.png" alt="Visitantes"><br><br>
             </div>
         </aside>
 
@@ -582,7 +679,7 @@
                     <button class="btn-special" onclick="revelarMensagem()">Ler Depoimento Especial 🎁</button>
                     
                     <div id="hidden-message">
-                        <p style="font-size: 15px;">Amor, quero te desejar o melhor aniversário do mundo. Trinta anos é algo lindo! Que essa nova fase seja incrível, cheia de paz, saúde, conquistas, mimos da Kuromi e as melhores músicas tocando de fundo sempre alegrando seus dias. Você é uma pessoa muito especial para mim. E quero sempre o melhor para você. Aproveite o seu dia e sua vida ao máximo, você merece o universo todinho meu amor!!!</p>
+                        <p style="font-size: 15px;">Amor, quero te desejar o melhor aniversário do mundo. Trinta anos é algo lindo! Que essa nova fase seja incrível, cheia de paz, saúde, conquistas, mimos da Kuromi e as melhores músicas tocando de fundo sempre alegrando seus dias. Você é uma pessoa muito especial para mim. E quero sempre o melhor para você. Aproveite o seu dia e sua vida ao máximo, você merece o universo todinho meu amor!!! I love you unconditionally, te amo infinito, sempre sempre!!" ❤️♾️</p>
                         <p style="font-family: 'Pacifico', cursive; color: var(--primary-purple); font-size: 1.8rem; margin-top: 15px;">Com carinho, Binho. :3</p>
                     </div>
                 </div>
@@ -593,23 +690,130 @@
 
     <!-- SCRIPTS -->
     <script>
-        // 1. PINCEL MÁGICO
-        const colorPicker = document.getElementById('color-picker');
-        colorPicker.addEventListener('input', function(e) {
-            document.documentElement.style.setProperty('--base-color', e.target.value);
-        });
+        // ================= PLAYLIST DINÂMICA (LocalStorage) ================= //
+        
+        // Músicas Padrão Iniciais (As 5 do Restart)
+        const defaultSongs = [
+            { name: "Lembranças", id: "-7QVg1fIAt8" },
+            { name: "Final Feliz", id: "di9ef5qLTMo" },
+            { name: "Amanhecer no Teu Olhar", id: "wPxnspl4t2c" },
+            { name: "Te Deixar", id: "mJV1wnDWVZM" },
+            { name: "Atos e Retratos", id: "odmpBWXkjho" }
+        ];
 
-        // 2. PLAYER DO YOUTUBE
-        function tocarRestart(videoId, btn) {
+        let playlist = [];
+
+        // Carrega a playlist salva no computador da pessoa, ou usa a padrão
+        function carregarPlaylist() {
+            const salva = localStorage.getItem('playlist_bruuh');
+            if(salva) {
+                playlist = JSON.parse(salva);
+            } else {
+                playlist = [...defaultSongs];
+            }
+            renderizarPlaylist();
+        }
+
+        // Desenha os botões na tela
+        function renderizarPlaylist() {
+            const container = document.getElementById('playlist-container');
+            container.innerHTML = ''; // Limpa antes de desenhar
+
+            playlist.forEach((song, index) => {
+                const itemDiv = document.createElement('div');
+                itemDiv.className = 'song-item';
+
+                // Botão principal de dar Play
+                const playBtn = document.createElement('button');
+                playBtn.className = 'song-btn';
+                playBtn.innerHTML = `▶ ${song.name}`;
+                playBtn.onclick = () => tocarMusica(song.id, playBtn);
+
+                // Lápis (Editar) e Lixeira (Deletar)
+                const controlsDiv = document.createElement('div');
+                controlsDiv.className = 'edit-controls';
+                
+                const editBtn = document.createElement('button');
+                editBtn.innerHTML = '✏️';
+                editBtn.title = 'Editar';
+                editBtn.onclick = () => editarMusica(index);
+
+                const deleteBtn = document.createElement('button');
+                deleteBtn.innerHTML = '🗑️';
+                deleteBtn.title = 'Deletar';
+                deleteBtn.onclick = () => deletarMusica(index);
+
+                controlsDiv.appendChild(editBtn);
+                controlsDiv.appendChild(deleteBtn);
+
+                itemDiv.appendChild(playBtn);
+                itemDiv.appendChild(controlsDiv);
+
+                container.appendChild(itemDiv);
+            });
+            
+            // Salva no banco de dados local do navegador
+            localStorage.setItem('playlist_bruuh', JSON.stringify(playlist));
+        }
+
+        // Função para extrair apenas a "ID" de qualquer link do YouTube (youtu.be, youtube.com/watch...)
+        function extrairIdYouTube(url) {
+            const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+            const match = url.match(regExp);
+            return (match && match[2].length === 11) ? match[2] : null;
+        }
+
+        function adicionarMusica() {
+            const nameInput = document.getElementById('new-song-name').value;
+            const urlInput = document.getElementById('new-song-url').value;
+
+            if(!nameInput || !urlInput) {
+                alert("Por favor, preencha o Nome e o Link do YouTube!");
+                return;
+            }
+
+            const videoId = extrairIdYouTube(urlInput);
+            if(!videoId) {
+                alert("Link inválido! Copie um link verdadeiro do YouTube (ex: https://youtu.be/...)");
+                return;
+            }
+
+            // Adiciona na lista e redesenha
+            playlist.push({ name: nameInput, id: videoId });
+            document.getElementById('new-song-name').value = '';
+            document.getElementById('new-song-url').value = '';
+            renderizarPlaylist();
+        }
+
+        function editarMusica(index) {
+            const novoNome = prompt("Digite o novo nome para a música:", playlist[index].name);
+            if(novoNome) {
+                playlist[index].name = novoNome;
+                renderizarPlaylist();
+            }
+        }
+
+        function deletarMusica(index) {
+            if(confirm(`Tem certeza que deseja apagar a música "${playlist[index].name}"?`)) {
+                playlist.splice(index, 1);
+                renderizarPlaylist();
+            }
+        }
+
+        function tocarMusica(videoId, btn) {
             document.querySelectorAll('.song-btn').forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
 
             const player = document.getElementById('player-youtube');
-            // O estilo CSS (aspect-ratio 16/9) no contêiner do player cuida de não cortar a tela
             player.innerHTML = `<iframe src="https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&rel=0&iv_load_policy=3" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
         }
 
-        // 3. REVELAR DEPOIMENTO E CHUVA DE CONFETES
+        // Inicia a playlist ao abrir o site
+        window.onload = function() {
+            carregarPlaylist();
+        }
+
+        // ================= REVELAR DEPOIMENTO E CONFETES ================= //
         function revelarMensagem() {
             const mensagem = document.getElementById('hidden-message');
             if(mensagem.style.display === 'none' || mensagem.style.display === '') {
@@ -619,7 +823,7 @@
         }
 
         function dispararConfetes() {
-            var duration = 4000; // 4 segundos de confetes para emocionar!
+            var duration = 4000; 
             var end = Date.now() + duration;
 
             (function frame() {
